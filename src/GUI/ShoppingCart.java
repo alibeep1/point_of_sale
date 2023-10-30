@@ -1,3 +1,5 @@
+import GUI.Product;
+
 import java.math.BigDecimal;
 
 /**

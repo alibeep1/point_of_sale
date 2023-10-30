@@ -1,5 +1,7 @@
+import GUI.Product;
+import GUI.ShoppingCart;
+
 import java.math.BigDecimal;
-import java.util.Map;
 
 /**
  * Receipt class that represents a receipt for a shopping cart.
@@ -49,8 +51,8 @@ public class Receipt {
         System.out.println("Payment Method: " + this.paymentMethod);
         System.out.println("-----------------------------");
         System.out.printf("%-20s%-15s%n", "Item", "Quantity", "Unit Price");
-//        for (Map.Entry<Product, BigDecimal> entry : this.cart.getCartItems().entrySet()) {
-//        for (Map.Entry<Product, BigDecimal> entry : this.cart.getCartItems().entrySet()) {
+//        for (Map.Entry<GUI.Product, BigDecimal> entry : this.cart.getCartItems().entrySet()) {
+//        for (Map.Entry<GUI.Product, BigDecimal> entry : this.cart.getCartItems().entrySet()) {
 //            System.out.printf("%-20s%-15s%n", entry.getKey().getName(), entry.getValue());
 //        }
         for (Product product : this.cart.getCartItems().getKeys()) {
@@ -59,8 +61,8 @@ public class Receipt {
         }
 //        System.out.printf("%-20s%-15s%n", "Item", "Quantity");
 
-//        for (Product product : this.cart.getCartItems().keys()) {
-//        for (Product product : this.cart.getCartItems().getKeys()) {
+//        for (GUI.Product product : this.cart.getCartItems().keys()) {
+//        for (GUI.Product product : this.cart.getCartItems().getKeys()) {
 //            BigDecimal quantity = this.cart.getCartItems().get(product);
 //            System.out.printf("%-20s%-15s%n", product.getName(), quantity);
 //        }

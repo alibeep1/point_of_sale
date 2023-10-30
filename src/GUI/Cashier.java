@@ -1,3 +1,5 @@
+import GUI.ShoppingCart;
+
 import java.math.BigDecimal;
 
 
