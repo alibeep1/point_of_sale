@@ -1,31 +1,50 @@
+package GUI;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ProductInventory class that represents an inventory of products.
- * The inventory uses a CustomMap to store Product objects with their ids as keys.
+ * GUI.ProductInventory class that represents an inventory of products.
+ * The inventory uses a GUI.CustomMap to store GUI.Product objects with their ids as keys.
  */
 public  class ProductInventory {
 
     private static CustomMap inventory = new CustomMap();
 
     /**
-     * ProductInventory class that represents an inventory of products.
-     * The inventory uses a CustomMap to store Product objects with their ids as keys.
+     * GUI.ProductInventory class that represents an inventory of products.
+     * The inventory uses a GUI.CustomMap to store GUI.Product objects with their ids as keys.
      */
-//    public ProductInventory() {
-//        inventory = new CustomMap();
-//    }
+
 
     public static CustomMap getInventory() {
+
         return inventory;
     }
 
+    // Returns the inventory products as 2-D Object array which is compatible with JTable
+    public static Object[][] getInventoryForTable() {
+        ArrayList<String> keys = inventory.getKeys();
+        ArrayList<Product> values = inventory.getValues();
+
+        Object[][] tableData = new Object[keys.size()][5];
+        for (int i = 0; i < keys.size(); i++) {
+            Product product = values.get(i);
+            tableData[i][0] = product.getId();
+            tableData[i][1] = product.getName();
+            tableData[i][2] = product.getQuantity();
+            tableData[i][3] = product.getPrice();
+            tableData[i][4] = product.getTaxRate();
+        }
+
+        return tableData;
+    }
     /**
      * Method to check the availability of a product in the inventory.
      * If the product is available and its quantity is greater than or equal to the requested quantity, return the product.
-     * If the product is available but its quantity is less than the requested quantity, throw an InsufficientQuantityException.
+     * If the product is available but its quantity is less than the requested quantity, throw an GUI.InsufficientQuantityException.
      * If the product is not available, return null.
      *
      * @param id       The id of the product to check.
@@ -33,7 +52,7 @@ public  class ProductInventory {
      * @return The product if it is available and its quantity is sufficient.
      * @throws InsufficientQuantityException If the product's quantity is insufficient.
      */
-    public Product getProductAvailability(String id, BigDecimal quantity) throws InsufficientQuantityException {
+    public static Product getProductAvailability(String id, BigDecimal quantity) throws InsufficientQuantityException {
         Product product = inventory.get(id);
         if (product != null && product.getQuantity().compareTo(quantity) >= 0) {
             return product;
@@ -50,7 +69,7 @@ public  class ProductInventory {
 
     // Method to add a new product to the inventory
     public static void addProduct(Product product) {
-//        Product product = new Product(id, name, quantity, price);
+//        GUI.Product product = new GUI.Product(id, name, quantity, price);
         inventory.put(product.getId(), product);
     }
 
@@ -67,7 +86,7 @@ public  class ProductInventory {
             product.setQuantity(quantity);
             product.setName(name);
         } else {
-            System.out.println("Product not found in inventory.");
+            System.out.println("GUI.Product not found in inventory.");
         }
     }
 
@@ -86,7 +105,7 @@ public  class ProductInventory {
             product.setQuantity(product.getQuantity().subtract(quantity));
 //            product.setName(name);
         } else {
-            System.out.println("Product not found in inventory.");
+            System.out.println("GUI.Product not found in inventory.");
         }
     }
 
@@ -100,9 +119,9 @@ public  class ProductInventory {
     public static void removeProduct(String id) {
         Product removedProduct = inventory.remove(id);
         if (removedProduct == null) {
-            System.out.println("Product not found in inventory.");
+            System.out.println("GUI.Product not found in inventory.");
         } else {
-            System.out.println("Product Removed Successfully!");
+            System.out.println("GUI.Product Removed Successfully!");
         }
     }
 
@@ -116,7 +135,7 @@ public  class ProductInventory {
         System.out.format("%-10s%-20s%-10s%-10s%-10s", "ID", "Name", "Quantity", "Price", "Tax Rate");
         System.out.println("\n------------------------------------------------------------------------------");
         for (Product product : getInventory().getValues()) {
-//        for (Product product : this.getInventory().values()) {
+//        for (GUI.Product product : this.getInventory().values()) {
             System.out.format("%-10s%-20s%-10s%-10s%-10s", product.getId(), product.getName(), product.getQuantity(), product.getPrice(), product.getTaxRate());
             System.out.println();
         }
